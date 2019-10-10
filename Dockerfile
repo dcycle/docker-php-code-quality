@@ -23,6 +23,10 @@ RUN apt-get update && \
 RUN chmod 744 $TARGET_DIR/composer-installer.sh
 RUN chmod 744 /usr/local/bin/composer
 
+COPY docker-resources /docker-resources
+RUN cp /docker-resources/composer-installer.sh $TARGET_DIR/
+RUN cp /docker-resources/composer-wrapper.sh /usr/local/bin/composer
+
 # Run composer installation of needed tools
 RUN $TARGET_DIR/composer-installer.sh && \
    composer selfupdate && \
@@ -38,7 +42,3 @@ RUN $TARGET_DIR/composer-installer.sh && \
        "phpcompatibility/php-compatibility:^9.0" \
        "phpmetrics/phpmetrics:^2.4" \
        "phpstan/phpstan:^0.11"
-
- COPY docker-resources /docker-resources
- RUN cp /docker-resources/composer-installer.sh $TARGET_DIR/
- RUN cp /docker-resources/composer-wrapper.sh /usr/local/bin/composer
