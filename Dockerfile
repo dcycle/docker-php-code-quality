@@ -13,9 +13,6 @@ RUN mkdir -p $TARGET_DIR
 
 WORKDIR $TARGET_DIR
 
-COPY composer-installer.sh $TARGET_DIR/
-COPY composer-wrapper.sh /usr/local/bin/composer
-
 RUN apt-get update && \
     apt-get install -y wget && \
     apt-get install -y zip && \
@@ -41,3 +38,7 @@ RUN $TARGET_DIR/composer-installer.sh && \
        "phpcompatibility/php-compatibility:^9.0" \
        "phpmetrics/phpmetrics:^2.4" \
        "phpstan/phpstan:^0.11"
+
+ COPY docker-resources /docker-resources
+ RUN cp /docker-resources/composer-installer.sh $TARGET_DIR/
+ RUN cp /docker-resources/composer-wrapper.sh /usr/local/bin/composer
