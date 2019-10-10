@@ -20,12 +20,13 @@ RUN apt-get update && \
     apt-get install -y libxml2-dev && \
     docker-php-ext-install xml
 
-RUN chmod 744 $TARGET_DIR/composer-installer.sh
-RUN chmod 744 /usr/local/bin/composer
-
 COPY docker-resources /docker-resources
 RUN cp /docker-resources/composer-installer.sh $TARGET_DIR/
 RUN cp /docker-resources/composer-wrapper.sh /usr/local/bin/composer
+
+
+RUN chmod 744 $TARGET_DIR/composer-installer.sh
+RUN chmod 744 /usr/local/bin/composer
 
 # Run composer installation of needed tools
 RUN $TARGET_DIR/composer-installer.sh && \
