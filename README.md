@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/dcycle/docker-php-code-quality.svg?style=svg)](https://circleci.com/gh/dcycle/docker-php-code-quality)
+
 PHP code quality
 -----
 
